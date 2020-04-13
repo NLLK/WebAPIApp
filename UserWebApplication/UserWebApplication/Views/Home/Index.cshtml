@@ -3,6 +3,21 @@
     var user = ViewBag.User.results[0];
 }
 
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: 'https://randomuser.me/api/',
+            dataType: 'json',
+            success: function (data) {
+                var user = data.results[0];
+                var header = $("#header");
+                header.text(user.name.first + " " + user.name.last);
+                var image = $("#image");
+                image.attr("src", user.picture.large);
+            }
+        });
+    });
+</script>
 <div class="row">
     <div class="col-md-4">
         <h2>@user.name.first @user.name.last</h2>
@@ -12,6 +27,17 @@
             for enjoyable, agile development.
         </p>
         <img src="@user.picture.large"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h2 id="header"></h2>
+        <p>
+            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+            enables a clean separation of concerns and gives you full control over markup
+            for enjoyable, agile development.
+        </p>
+        <img id="image"/>
     </div>
 
 </div>
